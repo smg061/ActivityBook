@@ -35,11 +35,5 @@ namespace API.Controllers
             })
             .ToArray();
         }
-
-        [HttpPost]
-        public string[] Post()
-        {
-            return new string[3]{"yes", "no", "maybe"};
-        }
     }
 }
