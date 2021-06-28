@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Application.Places;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace API.Controllers
@@ -19,7 +19,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Place>>> GetPlaces() 
         {
-            return await _context.Places.ToListAsync();
+            return await Mediator.Send(new List.Query());
 
         }
 
