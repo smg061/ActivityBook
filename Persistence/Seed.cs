@@ -8,10 +8,32 @@ namespace Persistence
 {
     public class Seed
     {
+        
         public static async Task SeedData(DataContext context)
         {
-            if (context.Activities.Any()) return;
-            
+            if (context.Activities.Any() && context.Places.Any()) return;
+            var places = new List<Place> 
+            {
+                new Place 
+                {
+                    Name = "London",
+                    ZIP = 8433424,
+                    Description = "A Place in London",
+                },
+                new Place 
+                {
+                    Name = "Pepepopoo",
+                    ZIP = 8424,
+                    Description = "A pepeeopo in London",
+                },
+                new Place 
+                {
+                    Name = "Laconia",
+                    ZIP = 34520,
+                    Description = "IT HURTS AAAAAAAAAAAA",
+                },
+
+            };
             var activities = new List<Activity>
             {
                 new Activity
@@ -107,6 +129,7 @@ namespace Persistence
             };
 
             await context.Activities.AddRangeAsync(activities);
+            await context.Places.AddRangeAsync(places);
             await context.SaveChangesAsync();
         }
     }
