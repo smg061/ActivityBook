@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
 import {Header, List} from 'semantic-ui-react';
+import Activities from './AppLogic'
 function App() {
 
   const [activities, setActivities] = useState([])
@@ -11,6 +12,7 @@ function App() {
       setActivities(response.data);
     })
   }, [])
+
 
   return (
     <div className="">

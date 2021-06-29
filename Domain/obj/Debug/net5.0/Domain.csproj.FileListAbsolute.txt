@@ -10,3 +10,15 @@ C:\Users\maxgo\Desktop\dotnet\dontnet_demo\Domain\obj\Debug\net5.0\Domain.csproj
 C:\Users\maxgo\Desktop\dotnet\dontnet_demo\Domain\obj\Debug\net5.0\Domain.dll
 C:\Users\maxgo\Desktop\dotnet\dontnet_demo\Domain\obj\Debug\net5.0\ref\Domain.dll
 C:\Users\maxgo\Desktop\dotnet\dontnet_demo\Domain\obj\Debug\net5.0\Domain.pdb
+F:\Desktop\working_directory\activity-book\Domain\bin\Debug\net5.0\Domain.deps.json
+F:\Desktop\working_directory\activity-book\Domain\bin\Debug\net5.0\Domain.dll
+F:\Desktop\working_directory\activity-book\Domain\bin\Debug\net5.0\ref\Domain.dll
+F:\Desktop\working_directory\activity-book\Domain\bin\Debug\net5.0\Domain.pdb
+F:\Desktop\working_directory\activity-book\Domain\obj\Debug\net5.0\Domain.csproj.AssemblyReference.cache
+F:\Desktop\working_directory\activity-book\Domain\obj\Debug\net5.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+F:\Desktop\working_directory\activity-book\Domain\obj\Debug\net5.0\Domain.AssemblyInfoInputs.cache
+F:\Desktop\working_directory\activity-book\Domain\obj\Debug\net5.0\Domain.AssemblyInfo.cs
+F:\Desktop\working_directory\activity-book\Domain\obj\Debug\net5.0\Domain.csproj.CoreCompileInputs.cache
+F:\Desktop\working_directory\activity-book\Domain\obj\Debug\net5.0\Domain.dll
+F:\Desktop\working_directory\activity-book\Domain\obj\Debug\net5.0\ref\Domain.dll
+F:\Desktop\working_directory\activity-book\Domain\obj\Debug\net5.0\Domain.pdb
