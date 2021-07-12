@@ -7,7 +7,8 @@ interface Props {
   closeForm: () => void;
   createOrEdit : (activity: Activity)=> void;
 }
-export default function ActivityForm({ activity: selectedActivity, closeForm, createOrEdit }: Props) {
+export default function ActivityForm({ activity: selectedActivity , closeForm, createOrEdit }: Props) { 
+  // if the selected activity is null, pass a blank activity object
   const initialState = selectedActivity ?? {
     id: "",
     title: "",
@@ -24,13 +25,14 @@ export default function ActivityForm({ activity: selectedActivity, closeForm, cr
     createOrEdit(activity)
   }
   function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    const { name, value } = event.target;
-    setActivity({ ...activity, [name]: value });
+    const { name, value } = event.target; // gets the event's name and value; ie the field's name and its value in the form
+    setActivity({ ...activity, [name]: value }); // spread the current activity object and then add the updated key:value
   }
   return (
     <Segment clearing>
       <Form onSubmit={handleSubmit} autoComplete="off">
-        <Form.Input placeholder="Title" value={activity.title} name="title" onChange={handleInputChange} />
+        {/*very important to add the name and value to each part of the form to be able to track changes  */}
+        <Form.Input placeholder="Title" value={activity.title} name="title" onChange={handleInputChange} /> 
         <Form.TextArea
           placeholder="Description"
           value={activity.description}

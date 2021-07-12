@@ -1,17 +1,19 @@
 import React from "react";
-import { Button, Item, ItemHeader, Label, Segment } from "semantic-ui-react";
+import { Button, Item, Label, Segment } from "semantic-ui-react";
 import { Activity } from "../../../app/models/activity";
 
 interface Props {
   activities: Activity[];
   selectActivity: (id: string) => void;
   cancelSelectedActivity: () => void;
+  deleteActivity: (id: string) => void;
 }
 
 export default function ActivityList({
   activities,
   selectActivity,
   cancelSelectedActivity,
+  deleteActivity,
 }: Props) {
   return (
     <Segment>
@@ -29,12 +31,19 @@ export default function ActivityList({
                 </div>
               </Item.Description>
               <Item.Extra>
+              <Button
+                  onClick={() => deleteActivity(activity.id)} // here you pass the activity id to setSelectActivity; which does sets the state like this: activities.find(x=> x.id)
+                  floated="right"
+                  content="Delete"
+                  color="red"
+                />
                 <Button
-                  onClick={() => selectActivity(activity.id)}
+                  onClick={() => selectActivity(activity.id)} // here you pass the activity id to setSelectActivity; which does sets the state like this: activities.find(x=> x.id)
                   floated="right"
                   content="View"
                   color="blue"
                 />
+
                 <Label basic content={activity.category} />
               </Item.Extra>
             </Item.Content>

@@ -5,15 +5,15 @@ import { Container } from "semantic-ui-react";
 import { Activity } from "../models/activity";
 import NavBar from "./NavBar";
 import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard";
-import ActivityList from "../../features/activities/dashboard/ActivityList";
+import { v4 as uuid } from "uuid";
+
 function App() {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
   const [editMode, setEditMode] = useState(false);
-
+  
   useEffect(() => {
-    axios.get<Activity[]>("http://localhost:5000/api/activities", {})
-    .then((response) => {
+    axios.get<Activity[]>("http://localhost:5000/api/activities", {}).then((response) => {
       setActivities(response.data);
     });
   }, []);
@@ -36,16 +36,20 @@ function App() {
   }
 
   function handlerCreateOrEditActivity(activity: Activity) {
-    activity.id
-    ? setActivities([...activities.filter(x => x.id !== activity.id), activity]) 
-    : setActivities([...activities, activity])
-    setEditMode(false)
+    activity.id // check if there's an activity id first
+      ? setActivities([...activities.filter((x) => x.id !== activity.id), activity]) // remover the activity we're updating and add the new activity to the array
+      : setActivities([...activities, { ...activity, id: uuid() }]); // otherwise just add the new activity to the array and add a unique guid to the new activity
+    setEditMode(false);
     setSelectedActivity(activity);
+  }
+  function handleDeleteActivity(id: string) {
+    setActivities([...activities.filter(x=> x.id !== id)])
+
   }
 
   return (
     <>
-      <NavBar openForm={handleFormOpen}/>
+      <NavBar openForm={handleFormOpen} />
       <Container style={{ marginTop: "7rem" }}>
         <ActivityDashboard
           activities={activities}
@@ -56,6 +60,7 @@ function App() {
           openForm={handleFormOpen}
           closeForm={handleFormClose}
           createOrEdit={handlerCreateOrEditActivity}
+          deleteActivity={handleDeleteActivity}
         />
       </Container>
     </>
