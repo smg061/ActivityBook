@@ -1,14 +1,16 @@
 import React from "react";
 import { Button, Card, Image } from "semantic-ui-react";
-import { Activity } from "../../../app/models/activity";
+import LoadingComponents from "../../../app/layout/LoadingComponents";
+import { useStore } from "../../../app/stores/store";
 
-interface Props {
-  activity: Activity;
-  cancelSelectedActivity: () => void;
-  openForm: ( id: string) => void;
-}
+export default function ActivityDetails() {
+  const { activityStore } = useStore();
+  const { selectedActivity: activity, openForm, cancelSelectedActivity } = activityStore;
 
-export default function ActivityDetails({activity, cancelSelectedActivity, openForm}: Props) {
+  // check for undefined so typescript doesn't yell at you
+  // we're checking for undefined in activitydashboard before rendering this form with {selectedActivity && } but typescript doesn't get that
+  if (!activity) return <LoadingComponents />;
+
   return (
     <Card fluid>
       <Image src={`/assets/categoryImages/${activity.category}.jpg`} />
@@ -21,7 +23,7 @@ export default function ActivityDetails({activity, cancelSelectedActivity, openF
       </Card.Content>
       <Card.Content extra>
         <Button.Group widths="2">
-          <Button basic onClick={()=> openForm(activity.id)} color="blue" content="Edit" />
+          <Button basic onClick={() => openForm(activity.id)} color="blue" content="Edit" />
           <Button basic onClick={cancelSelectedActivity} color="grey" content="Cancel" />
         </Button.Group>
       </Card.Content>

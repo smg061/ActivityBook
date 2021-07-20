@@ -1,27 +1,22 @@
 import React, { SyntheticEvent, useState } from "react";
 import { Button, Item, Label, Segment } from "semantic-ui-react";
 import { Activity } from "../../../app/models/activity";
+import { useStore } from "../../../app/stores/store";
 
 interface Props {
   activities: Activity[];
-  selectActivity: (id: string) => void;
-  cancelSelectedActivity: () => void;
   deleteActivity: (id: string) => void;
   submitting: boolean;
 }
 
-export default function ActivityList({
-  activities,
-  selectActivity,
-  cancelSelectedActivity,
-  deleteActivity,
-  submitting
-}: Props) {
+export default function ActivityList({ activities, deleteActivity, submitting }: Props) {
+  const { activityStore } = useStore();
 
   const [target, setTarget] = useState("");
+
   function handleActivityDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
     setTarget(e.currentTarget.name);
-    deleteActivity(id)
+    deleteActivity(id);
   }
   return (
     <Segment>
@@ -39,7 +34,7 @@ export default function ActivityList({
                 </div>
               </Item.Description>
               <Item.Extra>
-              <Button
+                <Button
                   name={activity.id}
                   onClick={(e) => handleActivityDelete(e, activity.id)} // here you pass the activity id to setSelectActivity; which does sets the state like this: activities.find(x=> x.id)
                   floated="right"
@@ -49,7 +44,7 @@ export default function ActivityList({
                   color="red"
                 />
                 <Button
-                  onClick={() => selectActivity(activity.id)} // here you pass the activity id to setSelectActivity; which does sets the state like this: activities.find(x=> x.id)
+                  onClick={() => activityStore.selectActivity(activity.id)} // here you pass the activity id to setSelectActivity; which does sets the state like this: activities.find(x=> x.id)
                   floated="right"
                   content="View"
                   color="blue"
