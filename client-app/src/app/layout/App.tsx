@@ -22,35 +22,6 @@ function App() {
   }, [activityStore]);
 
 
-  function handlerCreateOrEditActivity(activity: Activity) {
-    setSubmitting(true);
-    if (activity.id) {
-      agent.Activities.update(activity)
-        .then(() => {
-          setActivities([...activities.filter((x) => x.id !== activity.id), activity]);
-          setSelectedActivity(activity);
-          setEditMode(false);
-          setSubmitting(false);
-        })
-        .catch((err) => {
-          console.log(err);
-          setSubmitting(false);
-        });
-    } else {
-      activity.id = uuid();
-      agent.Activities.create(activity)
-        .then(() => {
-          setActivities([...activities, { ...activity, id: uuid() }]);
-          setSelectedActivity(activity);
-          setEditMode(false);
-          setSubmitting(false);
-        })
-        .catch((err) => {
-          console.log(err);
-          setSubmitting(false);
-        });
-    }
-  }
   function handleDeleteActivity(id: string) {
     setSubmitting(true);
     agent.Activities.delete(id).then(() => {
@@ -68,7 +39,6 @@ function App() {
       <Container style={{ marginTop: "7rem" }}>
         <ActivityDashboard
           activities={activityStore.activities}
-          createOrEdit={handlerCreateOrEditActivity}
           deleteActivity={handleDeleteActivity}
           submitting={submitting}
         />
